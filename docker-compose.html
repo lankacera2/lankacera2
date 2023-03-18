@@ -1,0 +1,15 @@
+version: "3"
+services:
+  hfla_site:
+    image: hackforlaops/ghpages:latest
+    container_name: hfla_site
+    command: >
+      sh -c "jekyll clean &&
+             jekyll serve --force_polling --livereload --config _config.yml,_config.docker.yml -I"
+    environment:
+      - JEKYLL_ENV=docker
+    ports:
+      - 4000:4000
+      - 35729:35729
+    volumes:
+      - .:/srv/jekyll
